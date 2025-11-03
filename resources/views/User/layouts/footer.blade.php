@@ -10,6 +10,7 @@
           <p class="mt-3"><strong>Phone:</strong> <span>{{ $contact->phone ?? '-' }}</span></p>
           <p><strong>Email:</strong> <span>{{ $contact->email ?? '-' }}</span></p>
         </div>
+        @if($contact)
         <div class="social-links d-flex mt-4">
           @if($contact->instagram)
             <a href="{{ $contact->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
@@ -18,6 +19,7 @@
             <a href="{{ $contact->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
           @endif
         </div>
+        @endif
       </div>
 
       <div class="col-lg-2 col-md-3 footer-links">
