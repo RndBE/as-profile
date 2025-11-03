@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Schema::defaultStringLength(191);
         if (Schema::hasTable('contacts')) {
             $contact = Contact::first();
             view()->share('contact', $contact);
