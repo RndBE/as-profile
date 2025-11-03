@@ -10,14 +10,17 @@
           <span>{{ $contact->phone ?? '-' }}</span>
         </i>
       </div>
-      <div class="social-links d-none d-md-flex align-items-center">
-        @if($contact->instagram)
-            <a href="{{ $contact->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+        @if($contact)
+            <div class="social-links d-none d-md-flex align-items-center">
+                @if($contact->instagram)
+                    <a href="{{ $contact->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                @endif
+                @if($contact->linkedin)
+                    <a href="{{ $contact->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
+                @endif
+            </div>
         @endif
-        @if($contact->linkedin)
-            <a href="{{ $contact->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
-        @endif
-      </div>
+
     </div>
   </div>
 
