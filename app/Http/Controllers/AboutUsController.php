@@ -16,7 +16,7 @@ class AboutUsController extends Controller
     public function index()
     {
         $about = AboutUs::with('features')->first();
-        return view('Admin.about.index', compact('about'));
+        return view('dmin.about.index', compact('about'));
     }
 
     /**
