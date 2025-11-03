@@ -1,7 +1,43 @@
 {{-- resources/views/User/solutions/show.blade.php --}}
-@extends('User.layouts.app')
+@section('title', $project->nama_projek . ' | CV Arta Solusindo')
 
-@section('title', $project->nama_projek)
+{{-- === Meta SEO Dinamis === --}}
+@section('meta_description', Str::limit(strip_tags($project->deskripsi), 160))
+@section('meta_keywords', trim($project->kategori_projek . ', ' . ($project->clients->nama ?? '') . ', CV Arta Solusindo, teknologi, engineering, software development, automation, smart factory', ', '))
+
+{{-- === Open Graph (Facebook, LinkedIn, WhatsApp) === --}}
+@section('og_title', $project->nama_projek . ' | CV Arta Solusindo')
+@section('og_description', Str::limit(strip_tags($project->deskripsi), 160))
+@section('og_image', isset($project->imageProjects[0]) ? asset('storage/' . $project->imageProjects[0]->gambar) : asset('images/no-image.jpg'))
+
+{{-- === Twitter Card === --}}
+@section('twitter_title', $project->nama_projek . ' | CV Arta Solusindo')
+@section('twitter_description', Str::limit(strip_tags($project->deskripsi), 160))
+@section('twitter_image', isset($project->imageProjects[0]) ? asset('storage/' . $project->imageProjects[0]->gambar) : asset('images/no-image.jpg'))
+
+{{-- === Structured Data / Schema.org === --}}
+@push('head')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Project",
+  "name": "{{ $project->nama_projek }}",
+  "description": "{{ Str::limit(strip_tags($project->deskripsi), 200) }}",
+  "image": "{{ isset($project->imageProjects[0]) ? asset('storage/' . $project->imageProjects[0]->gambar) : asset('images/no-image.jpg') }}",
+  "url": "{{ url()->current() }}",
+  "category": "{{ $project->kategori_projek }}",
+  "locationCreated": "{{ $project->lokasi ?? 'Indonesia' }}",
+  "creator": {
+    "@type": "Organization",
+    "name": "CV Arta Solusindo",
+    "url": "{{ url('/') }}"
+  },
+  "dateCreated": "{{ $project->tahun }}",
+  "mainEntityOfPage": "{{ url()->current() }}"
+}
+</script>
+@endpush
+
 
 @section('content')
     <!-- Page Title -->
@@ -45,11 +81,11 @@
                         <div class="swiper-wrapper align-items-center">
                             @forelse($project->imageProjects as $img)
                                 <div class="swiper-slide">
-                                    <img src="{{ asset('storage/' . $img->gambar) }}" alt="{{ $project->nama_projek }}">
+                                    <img loading="lazy" src="{{ asset('storage/' . $img->gambar) }}" alt="{{ $project->nama_projek }}">
                                 </div>
                             @empty
                                 <div class="swiper-slide">
-                                    <img src="{{ asset('images/no-image.jpg') }}" alt="No image available">
+                                    <img loading="lazy" src="{{ asset('images/no-image.jpg') }}" alt="No image available">
                                 </div>
                             @endforelse
                         </div>

@@ -27,7 +27,7 @@
   <div class="branding d-flex align-items-center">
     <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-            <img src="{{ asset('assets/img/CV AS.png') }}" alt="Flexor Logo" class="img-fluid" style="height: 40px;">
+            <img loading="lazy" src="{{ asset('assets/img/CV AS.png') }}" alt="Flexor Logo" class="img-fluid" style="height: 40px;">
         </a>
 
 

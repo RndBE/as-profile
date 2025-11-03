@@ -1,7 +1,17 @@
 {{-- resources/views/User/solutions/show.blade.php --}}
 @extends('User.layouts.app')
 
-@section('title', $solution->nama)
+@section('title', $solution->nama . ' | CV Arta Solusindo')
+
+{{-- ===== SEO Meta Section ===== --}}
+@section('meta_description', Str::limit(strip_tags($solution->content ?? 'Solusi teknologi profesional dari CV Arta Solusindo.'), 160))
+@section('meta_keywords', $solution->meta_keywords ?? 'Solusi teknologi, engineering, Beacon Engineering, CV Arta Solusindo, sistem informasi, automation, software')
+@section('og_title', $solution->nama . ' | CV Arta Solusindo')
+@section('og_description', Str::limit(strip_tags($solution->content ?? 'Solusi inovatif untuk kebutuhan industri modern.'), 160))
+@section('og_image', $solution->image_content ? asset('storage/' . $solution->image_content) : asset('assets/img/og-image.jpg'))
+@section('twitter_title', $solution->nama . ' | CV Arta Solusindo')
+@section('twitter_description', Str::limit(strip_tags($solution->content ?? 'Solusi teknologi industri dari CV Arta Solusindo.'), 160))
+@section('twitter_image', $solution->image_content ? asset('storage/' . $solution->image_content) : asset('assets/img/og-image.jpg'))
 
 @section('content')
     <!-- Page Title -->
@@ -41,7 +51,7 @@
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
                     @if($solution->image_content)
                         <div class="solution-image-wrapper mb-3">
-                            <img src="{{ asset('storage/' . $solution->image_content) }}"
+                            <img loading="lazy" src="{{ asset('storage/' . $solution->image_content) }}"
                                 alt="{{ $solution->nama }}"
                                 class="img-fluid services-img">
                         </div>

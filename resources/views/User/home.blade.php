@@ -8,10 +8,10 @@
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     {{-- Gambar Carousel --}}
                     @if ($carousel->gambar && file_exists(public_path('storage/' . $carousel->gambar)))
-                        <img src="{{ asset('storage/' . $carousel->gambar) }}" alt="{{ $carousel->judul }}">
+                        <img loading="lazy" src="{{ asset('storage/' . $carousel->gambar) }}" alt="{{ $carousel->judul }}">
                     @else
                         {{-- Jika gambar tidak ada --}}
-                        <img src="{{ asset('assets/img/hero-carousel/hero-default.jpg') }}" alt="Default Image">
+                        <img loading="lazy" src="{{ asset('assets/img/hero-carousel/hero-default.jpg') }}" alt="Default Image">
                     @endif
 
                     {{-- Konten Carousel --}}
@@ -55,9 +55,9 @@
                     <!-- Gambar & Video -->
                     <div class="col-lg-5 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
                         @if(!empty($about->gambar))
-                            <img src="{{ asset('storage/' . $about->gambar) }}" class="img-fluid rounded shadow-sm" alt="{{ $about->judul }}">
+                            <img loading="lazy" src="{{ asset('storage/' . $about->gambar) }}" class="img-fluid rounded shadow-sm" alt="{{ $about->judul }}">
                         @else
-                            <img src="{{ asset('assets/img/about.jpg') }}" class="img-fluid rounded shadow-sm" alt="About Us">
+                            <img loading="lazy" src="{{ asset('assets/img/about.jpg') }}" class="img-fluid rounded shadow-sm" alt="About Us">
                         @endif
 
                         @if(!empty($about->video_url))
@@ -131,7 +131,7 @@
                 </script>
                 <div class="swiper-wrapper align-items-center">
                     @forelse($clients as $client)
-                        <div class="swiper-slide"><img src="{{ asset('storage/' . $client->logo) }}" class="img-fluid" alt="{{ $client->nama }}"></div>
+                        <div class="swiper-slide"><img loading="lazy" src="{{ asset('storage/' . $client->logo) }}" class="img-fluid" alt="{{ $client->nama }}"></div>
                     @empty
                         <p class="text-center col-12">Belum ada client.</p>
                     @endforelse
@@ -175,7 +175,7 @@
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section dark-background">
-        <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
+        <img loading="lazy" src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -200,7 +200,7 @@
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 @if($testimony->foto)
-                                    <img src="{{ asset('storage/' . $testimony->foto) }}"
+                                    <img loading="lazy" src="{{ asset('storage/' . $testimony->foto) }}"
                                         class="testimonial-img rounded-full object-cover"
                                         alt="{{ $testimony->nama }}"
                                         style="width:90px; height:90px;">
@@ -269,7 +269,7 @@
                     <div class="swiper-slide project-item">
                         <a href="{{ route('projects.show', $project->slug) }}" class="project-link">
                             <div class="project-img">
-                                <img src="{{ asset('storage/' . $project->thumbnail) }}" class="img-fluid" alt="">
+                                <img loading="lazy" src="{{ asset('storage/' . $project->thumbnail) }}" class="img-fluid" alt="">
                             </div>
                             <div class="project-info">
                                 <h5>{{ $project->nama_projek }}</h5>
@@ -309,7 +309,7 @@
 
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="{{ asset('storage/' . $team->foto) }}" class="img-fluid" alt="{{ $team->nama }}">
+                            <img loading="lazy" src="{{ asset('storage/' . $team->foto) }}" class="img-fluid" alt="{{ $team->nama }}">
                             <div class="social">
                                 @if (!empty($team->facebook))
                                     <a href="{{ $team->facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>

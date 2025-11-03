@@ -3,7 +3,7 @@
     <div class="row gy-4 justify-content-between align-items-start">
       <div class="col-lg-4 col-md-6 footer-about">
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-            <img src="{{ asset('assets/img/CV AS.png') }}" alt="Flexor Logo" class="img-fluid" style="height: 40px;">
+            <img loading="lazy" src="{{ asset('assets/img/CV AS.png') }}" alt="Flexor Logo" class="img-fluid" style="height: 40px;">
         </a>
         <div class="footer-contact pt-2">
           <p>{{ $contact->alamat ?? 'Alamat belum diatur' }}</p>
