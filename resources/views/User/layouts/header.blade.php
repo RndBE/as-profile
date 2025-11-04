@@ -1,6 +1,6 @@
 <header id="header" class="header sticky-top">
 
-  <div class="topbar d-flex align-items-center dark-background">
+  {{-- <div class="topbar d-flex align-items-center dark-background">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center">
@@ -22,7 +22,7 @@
         @endif
 
     </div>
-  </div>
+  </div> --}}
 
   <div class="branding d-flex align-items-center">
     <div class="container position-relative d-flex align-items-center justify-content-between">

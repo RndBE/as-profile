@@ -291,7 +291,7 @@
 
 
     <!-- Team Section -->
-    <section id="team" class="team section light-background">
+    {{-- <section id="team" class="team section light-background">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
@@ -335,7 +335,7 @@
             <!-- End Team Member -->
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- /Team Section -->
 
     <!-- Contact Section -->
