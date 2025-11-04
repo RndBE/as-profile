@@ -15,16 +15,23 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\SolutionsController;
 use App\Http\Controllers\TestimonysController;
 use App\Http\Controllers\SendContactController;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::get('/', HomePage::class)->name('user.home');
 Route::get('/solutions/{slug}', [SolutionsController::class, 'show'])->name('solutions.show');
 Route::get('/projects/{slug}', [ProjectsController::class, 'show'])->name('projects.show');
 Route::post('/contact/send', [SendContactController::class, 'send'])->name('contact.send');
+Route::get('/login', function () {
+    abort(404); 
+});
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
+    Route::get('/open-panel-as', function () {
         return view('livewire.auth.login');
-    })->name('login');
+    })->name('login'); // tetap pakai name('login') agar Fortify tahu ini route login
+
+    // Endpoint POST login Fortify
+    Route::post('/open-panel-as', [AuthenticatedSessionController::class, 'store'])->name('login.store');
 
     Route::get('/register', function () {
         return redirect()->route('login');
