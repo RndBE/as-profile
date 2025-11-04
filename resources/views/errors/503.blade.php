@@ -14,9 +14,11 @@
                 <p class="text-muted mb-4 px-3">
                     Kami sedang melakukan pembaruan sistem untuk meningkatkan layanan. Silakan kembali lagi nanti.
                 </p>
-                <a href="{{ route('user.home') }}" class="btn px-4 py-2" style="background-color:#b40404;color:#fff;">
+                <button type="button" onclick="location.reload()"
+                    class="btn px-4 py-2"
+                    style="background-color:#b40404; color:#fff;">
                     <i class="bi bi-arrow-clockwise me-1"></i> Coba Lagi
-                </a>
+                </button>
             </div>
         </div>
     </div>

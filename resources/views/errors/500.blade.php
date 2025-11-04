@@ -14,9 +14,13 @@
                 <p class="text-muted mb-4 px-3">
                     Kami sedang memperbaikinya. Silakan coba lagi nanti atau hubungi administrator.
                 </p>
-                <a href="{{ route('user.home') }}" class="btn px-4 py-2" style="background-color:#b40404;color:#fff;">
+
+                <!-- Tombol Muat Ulang (refresh halaman saat ini) -->
+                <button type="button" onclick="location.reload()"
+                    class="btn px-4 py-2"
+                    style="background-color:#b40404; color:#fff;">
                     <i class="bi bi-arrow-repeat me-1"></i> Muat Ulang
-                </a>
+                </button>
             </div>
         </div>
     </div>
