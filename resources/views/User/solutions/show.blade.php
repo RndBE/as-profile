@@ -13,6 +13,44 @@
 @section('twitter_description', Str::limit(strip_tags($solution->content ?? 'Solusi teknologi industri dari CV Arta Solusindo.'), 160))
 @section('twitter_image', $solution->image_content ? asset('storage/' . $solution->image_content) : asset('assets/img/og-image.jpg'))
 
+@push('styles')
+@php
+    $solutionSchema = [
+        "@context" => "https://schema.org",
+        "@type" => "Service",
+        "serviceType" => $solution->nama,
+        "name" => $solution->nama,
+        "description" => Str::limit(strip_tags($solution->content ?? 'Solusi teknologi dan engineering profesional dari CV Arta Solusindo.'), 200),
+        "provider" => [
+            "@type" => "Organization",
+            "name" => "CV Arta Solusindo",
+            "alternateName" => "Beacon Engineering",
+            "url" => url('/'),
+            "logo" => asset('assets/img/icon.png'),
+            "sameAs" => [
+                "https://www.facebook.com/",
+                "https://www.instagram.com/",
+                "https://www.linkedin.com/",
+                "https://wa.me/628123456789"
+            ]
+        ],
+        "areaServed" => [
+            "@type" => "Country",
+            "name" => "Indonesia"
+        ],
+        "url" => url()->current(),
+        "image" => $solution->image_content
+            ? asset('storage/' . $solution->image_content)
+            : asset('assets/img/og-image.jpg'),
+        "mainEntityOfPage" => url()->current()
+    ];
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode($solutionSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) !!}
+</script>
+@endpush
+
 @section('content')
     <!-- Page Title -->
     <div class="page-title">

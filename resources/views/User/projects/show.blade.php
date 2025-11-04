@@ -1,3 +1,4 @@
+@extends('User.layouts.app')
 {{-- resources/views/User/solutions/show.blade.php --}}
 @section('title', $project->nama_projek . ' | CV Arta Solusindo')
 
@@ -15,28 +16,42 @@
 @section('twitter_description', Str::limit(strip_tags($project->deskripsi), 160))
 @section('twitter_image', isset($project->imageProjects[0]) ? asset('storage/' . $project->imageProjects[0]->gambar) : asset('images/no-image.jpg'))
 
-{{-- === Structured Data / Schema.org === --}}
-@push('head')
+@push('styles')
+@php
+    $projectSchema = [
+        "@context" => "https://schema.org",
+        "@type" => "Project",
+        "name" => $project->nama_projek,
+        "description" => Str::limit(strip_tags($project->deskripsi ?? 'Projek teknologi dan engineering profesional dari CV Arta Solusindo.'), 200),
+        "image" => isset($project->imageProjects[0])
+            ? asset('storage/' . $project->imageProjects[0]->gambar)
+            : asset('images/no-image.jpg'),
+        "url" => url()->current(),
+        "category" => $project->kategori_projek ?? 'Engineering Project',
+        "locationCreated" => $project->lokasi ?? 'Indonesia',
+        "creator" => [
+            "@type" => "Organization",
+            "name" => "CV Arta Solusindo",
+            "alternateName" => "Beacon Engineering",
+            "url" => url('/'),
+            "logo" => asset('assets/img/icon.png'),
+            "sameAs" => [
+                "https://www.facebook.com/",
+                "https://www.instagram.com/",
+                "https://www.linkedin.com/",
+                "https://wa.me/628123456789"
+            ]
+        ],
+        "dateCreated" => $project->tahun ?? date('Y'),
+        "mainEntityOfPage" => url()->current(),
+    ];
+@endphp
+
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Project",
-  "name": "{{ $project->nama_projek }}",
-  "description": "{{ Str::limit(strip_tags($project->deskripsi), 200) }}",
-  "image": "{{ isset($project->imageProjects[0]) ? asset('storage/' . $project->imageProjects[0]->gambar) : asset('images/no-image.jpg') }}",
-  "url": "{{ url()->current() }}",
-  "category": "{{ $project->kategori_projek }}",
-  "locationCreated": "{{ $project->lokasi ?? 'Indonesia' }}",
-  "creator": {
-    "@type": "Organization",
-    "name": "CV Arta Solusindo",
-    "url": "{{ url('/') }}"
-  },
-  "dateCreated": "{{ $project->tahun }}",
-  "mainEntityOfPage": "{{ url()->current() }}"
-}
+{!! json_encode($projectSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) !!}
 </script>
 @endpush
+
 
 
 @section('content')
