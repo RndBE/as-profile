@@ -22,7 +22,7 @@ Route::get('/solutions/{slug}', [SolutionsController::class, 'show'])->name('sol
 Route::get('/projects/{slug}', [ProjectsController::class, 'show'])->name('projects.show');
 Route::post('/contact/send', [SendContactController::class, 'send'])->name('contact.send');
 Route::get('/login', function () {
-    abort(404); 
+    abort(404);
 });
 
 Route::middleware('guest')->group(function () {
@@ -49,6 +49,7 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::post('about/', [AboutUsController::class, 'store'])->name('about.store');
     Route::post('about/feature', [AboutUsController::class, 'storeFeature'])->name('about.feature.store');
     Route::delete('about/feature/{id}', [AboutUsController::class, 'destroyFeature'])->name('about.feature.destroy');
+    Route::put('about/feature/{id}', [AboutUsController::class, 'updateFeature'])->name('about.feature.update');
 
     Route::resource('/solutions', SolutionsController::class);
     Route::resource('/clients', ClientsController::class);

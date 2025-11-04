@@ -82,8 +82,18 @@
                 <form action="{{ route('about.feature.store') }}" method="POST" class="space-y-4">
                     @csrf
                     <flux:input type="hidden" name="about_id" value="{{ $about->id ?? '' }}" />
-
-                    <flux:input label="Icon (contoh: bi bi-star)" name="icon" placeholder="Masukkan class icon" />
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">
+                            Icon
+                            <small class="text-gray-500">
+                                (contoh: <code>bi bi-star</code>)
+                            </small>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" class="text-blue-600 hover:underline ms-1" title="Lihat daftar icon Bootstrap">
+                                <i class="bi bi-box-arrow-up-right"></i>
+                            </a>
+                        </label>
+                        <flux:input name="icon" placeholder="Masukkan class icon, contoh: bi bi-star" />
+                    </div>
                     <flux:input label="Judul Fitur" name="judul" placeholder="Judul fitur" />
                     <flux:textarea label="Deskripsi Fitur" name="deskripsi" placeholder="Deskripsi singkat fitur"></flux:textarea>
                     <flux:input label="Urutan" type="number" name="urutan" placeholder="1, 2, 3..." />
@@ -100,6 +110,7 @@
                 <div class="space-y-2">
                     @forelse($about->features ?? [] as $feature)
                         <div class="p-3 flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition rounded-md">
+                            <!-- Kiri: Icon + Deskripsi -->
                             <div class="flex items-center gap-3">
                                 <i class="{{ $feature->icon }} text-primary text-lg"></i>
                                 <div>
@@ -107,16 +118,30 @@
                                     <p class="text-sm text-gray-500">{{ $feature->deskripsi }}</p>
                                 </div>
                             </div>
-                            <flux:modal.trigger name="delete-feature-{{ $feature->id }}">
-                                <flux:button variant="danger"><i class="bi bi-trash"></i> Delete</flux:button>
-                            </flux:modal.trigger>
+
+                            <!-- Kanan: Tombol aksi -->
+                            <div class="flex items-center gap-2">
+                                <flux:modal.trigger name="edit-feature-{{ $feature->id }}">
+                                    <flux:button variant="outline">
+                                        <i class="bi bi-pencil me-1"></i> Edit
+                                    </flux:button>
+                                </flux:modal.trigger>
+
+                                <flux:modal.trigger name="delete-feature-{{ $feature->id }}">
+                                    <flux:button variant="danger">
+                                        <i class="bi bi-trash me-1"></i> Hapus
+                                    </flux:button>
+                                </flux:modal.trigger>
+                            </div>
                         </div>
-                        @include('Admin.about.delete', ['feature' => $feature])
                     @empty
                         <p class="text-gray-500 text-sm italic">Belum ada fitur ditambahkan.</p>
                     @endforelse
                 </div>
+
             </div>
         </div>
     </section>
+    @include('Admin.about.delete', ['feature' => $feature])
+    @include('Admin.about.edit', ['feature' => $feature])
 </x-layouts.app>

@@ -82,6 +82,24 @@ class AboutUsController extends Controller
         return redirect()->back()->with('success', 'Fitur berhasil ditambahkan.');
     }
 
+    public function updateFeature(Request $request, $id)
+    {
+        $feature = AboutFeatures::findOrFail($id);
+
+        $validated = $request->validate([
+            'icon' => 'nullable|string|max:100',
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'urutan' => 'nullable|integer|min:1',
+        ]);
+
+        $feature->update($validated);
+
+        toast('Fitur berhasil diperbarui!', 'success');
+        return redirect()->back()->with('success', 'Fitur berhasil diperbarui.');
+    }
+
+
     /**
      * Hapus fitur dari About Us
      */
