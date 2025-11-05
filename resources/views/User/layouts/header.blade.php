@@ -37,7 +37,7 @@
           <li><a href="{{ request()->is('/') ? '#about' : route('user.home') . '#about' }}">About</a></li>
           <li><a href="{{ request()->is('/') ? '#solutions' : route('user.home') . '#solutions' }}" class="{{ request()->is('solutions') || request()->is('solutions/*') ? 'active' : '' }}">Solutions</a></li>
           <li><a href="{{ request()->is('/') ? '#project' : route('user.home') . '#project' }}" class="{{ request()->is('project') ? 'active' : '' }}">Project</a></li>
-          <li><a href="{{ request()->is('/') ? '#team' : route('user.home') . '#team' }}">Team</a></li>
+          {{-- <li><a href="{{ request()->is('/') ? '#team' : route('user.home') . '#team' }}">Team</a></li> --}}
           {{-- <li class="dropdown">
             <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
