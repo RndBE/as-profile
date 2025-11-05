@@ -26,12 +26,12 @@ Route::get('/login', function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
+    Route::get('/open-panel-as', function () {
         return view('livewire.auth.login');
     })->name('login'); // tetap pakai name('login') agar Fortify tahu ini route login
 
     // Endpoint POST login Fortify
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
+    Route::post('/open-panel-as', [AuthenticatedSessionController::class, 'store'])->name('login.store');
 
     Route::get('/register', function () {
         return redirect()->route('login');
